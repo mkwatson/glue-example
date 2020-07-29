@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    - name: AWS CloudFormation "Deploy CloudFormation Stack" Action for GitHub Actions
+      uses: aws-actions/aws-cloudformation-github-deploy@v1.0.3
+      with:
+        name: TestGlueStack
+        template: testGlueStack.yaml
+        # The comma-delimited list of stack template capabilities to acknowledge. Defaults to 'CAPABILITY_IAM'
+        # capabilities: # optional, default is CAPABILITY_IAM
+
